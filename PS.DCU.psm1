@@ -20,7 +20,7 @@ New-Variable -Name 'dcu_default_install_paths' -Option Constant -Value @(
 )
 
 New-Variable -Name 'dcu_report_path' -Option Constant -Value (
-    Join-Path -Path $env:ProgramData -ChildPath 'Dell\CommandUpdate\Reports'
+    Join-Path -Path ([System.Environment]::GetFolderPath('CommonApplicationData')) -ChildPath 'Dell\CommandUpdate\Reports'
 )
 
 New-Variable -Name 'dcu_exit_codes' -Option Constant -Value @{

@@ -1,6 +1,6 @@
 {
     "name": "PS.DCU",
-    "image": "mcr.microsoft.com/powershell:7.4-ubuntu-22.04",
+    "image": "mcr.microsoft.com/powershell:7.5-ubuntu-24.04",
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },

@@ -1,0 +1,24 @@
+{
+    "name": "PS.DCU",
+    "image": "mcr.microsoft.com/powershell:7.4-ubuntu-22.04",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.powershell"
+            ],
+            "settings": {
+                "powershell.codeFormatting.preset": "OTBS",
+                "powershell.codeFormatting.useCorrectCasing": true,
+                "files.encoding": "utf8",
+                "files.eol": "\n",
+                "editor.tabSize": 4,
+                "editor.insertSpaces": true
+            }
+        }
+    },
+    "postCreateCommand": "pwsh -NoProfile -Command './Build/build.ps1 -ResolveDependency -TaskList Init'",
+    "remoteUser": "root"
+}

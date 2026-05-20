@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Analyze and Test
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Display PowerShell version
+        shell: pwsh
+        run: $PSVersionTable
+
+      - name: Resolve build dependencies
+        shell: pwsh
+        run: ./Build/build.ps1 -ResolveDependency -TaskList Init
+
+      - name: Stage, analyze, and test
+        shell: pwsh
+        run: ./Build/build.ps1 -TaskList Analyze, Test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pester-results
+          path: Artifacts/Test-Unit_*.xml
+          if-no-files-found: ignore

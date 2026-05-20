@@ -1,0 +1,12 @@
+# Build / packaging output
+Staging/
+Artifacts/
+
+# Editor
+.vs/
+*.swp
+*.bak
+
+# OS
+Thumbs.db
+.DS_Store

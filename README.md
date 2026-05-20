@@ -1,5 +1,8 @@
 # PS.DCU
 
+[![validate](https://github.com/johnsarie27/PS.DCU/actions/workflows/validate.yml/badge.svg)](https://github.com/johnsarie27/PS.DCU/actions/workflows/validate.yml)
+[![release](https://github.com/johnsarie27/PS.DCU/actions/workflows/release.yml/badge.svg)](https://github.com/johnsarie27/PS.DCU/actions/workflows/release.yml)
+
 PowerShell module that wraps the Dell Command Update CLI (`dcu-cli.exe`).
 
 ## Requirements
@@ -50,9 +53,18 @@ Get-DCUConfiguration
 Set-DCUConfiguration -ScheduleWeekly 'Sunday' -ScheduleTime '03:00' -LockSettings 'Enable'
 ```
 
-## Contributing
+## Releases
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+Releases are cut by pushing a semver tag matching `v[0-9].[0-9]+.[0-9]+`:
+
+```powershell
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+This triggers [.github/workflows/release.yml](.github/workflows/release.yml), which stages the module, runs PSScriptAnalyzer and Pester, builds the zip via `CreateBuildArtifact`, and publishes a GitHub Release with auto-generated notes and the artifact attached.
+
+Pull requests are validated by [.github/workflows/validate.yml](.github/workflows/validate.yml) (Init → Stage → Analyze → Test).
 
 ## License
 

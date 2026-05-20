@@ -1,0 +1,32 @@
+name: validate
+run-name: validate
+
+on:
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # checkout code
+
+      - shell: pwsh # install dependencies
+        run: .\Build\build.ps1 -ResolveDependency -TaskList 'Init'
+
+      - shell: pwsh # stage module
+        run: .\Build\build.ps1 -TaskList 'CombineFunctionsAndStage'
+
+      - shell: pwsh # psscriptanalyzer
+        run: .\Build\build.ps1 -TaskList 'Analyze'
+
+      - shell: pwsh # pester
+        run: .\Build\build.ps1 -TaskList 'Test'
+
+      - uses: actions/upload-artifact@v7 # publish pester results
+        if: always()
+        with:
+          name: Pester Results
+          path: "Artifacts/**/Test-*.xml"
+          if-no-files-found: error

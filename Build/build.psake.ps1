@@ -138,7 +138,7 @@ Task 'Test' -depends 'ImportStagingModule' {
     $TestFilePath = Join-Path -Path $ArtifactFolder -ChildPath $TestFile
 
     $PesterConfig = New-PesterConfiguration
-    $PesterConfig.TestResult.OutputFormat = 'NUnitXml'
+    $PesterConfig.TestResult.OutputFormat = 'JUnitXml'
     $PesterConfig.TestResult.OutputPath = $TestFilePath
     $PesterConfig.TestResult.Enabled = $true
     $PesterConfig.Run.PassThru = $true

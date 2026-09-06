@@ -11,7 +11,6 @@ jobs:
     uses: jjohns-dev/pwsh-module-ci/.github/workflows/ci.yml@v1
     with:
       os-matrix: '["ubuntu-latest"]'
-      enable-test-report: false # build.psake.ps1 outputs NUnitXml, not JUnit-compatible
     permissions:
       contents: read
       checks: write

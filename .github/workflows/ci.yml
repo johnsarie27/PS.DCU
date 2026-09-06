@@ -1,0 +1,16 @@
+name: ci
+run-name: ci
+
+on:
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    uses: jjohns-dev/pwsh-module-ci/.github/workflows/ci.yml@v1
+    with:
+      os-matrix: '["ubuntu-latest"]'
+    permissions:
+      contents: read
+      checks: write
